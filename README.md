@@ -90,6 +90,7 @@ fromWei         <Function (value, unit) : (String)>
 'Mwei':         '1000000',
 'lovelace':     '1000000',
 'picoether':    '1000000',
+'fuwei':    '100000000',
 'gwei':         '1000000000',
 'Gwei':         '1000000000',
 'shannon':      '1000000000',
