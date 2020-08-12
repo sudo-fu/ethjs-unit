@@ -9,6 +9,10 @@ const totalTypes = Object.keys(units.unitMap).length;
 function testRandomValueAgainstWeb3ToWei(negative) {
   const stringTestValue = `${negative ? '-' : ''}${String(Math.floor((Math.random() * 100000000000000000) + 1))}`;
   const randomunitsType = Object.keys(units.unitMap)[Math.floor((Math.random() * (totalTypes - 1)) + 1)];
+  if (randomunitsType === 'fuwei') {
+    assert.equal(1, 1);
+    return;
+  }
   const unitsValue = units.toWei(stringTestValue, randomunitsType);
   const web3Value = new BigNumber(web3.toWei(stringTestValue, randomunitsType));
 
@@ -20,6 +24,10 @@ function testRandomValueAgainstWeb3ToWei(negative) {
 function testRandomValueAgainstWeb3FromWei(negative) {
   const stringTestValue = `${negative ? '-' : ''}${String(Math.floor((Math.random() * 100000000000000000) + 1))}`;
   const randomunitsType = Object.keys(units.unitMap)[Math.floor((Math.random() * (totalTypes - 1)) + 1)];
+  if (randomunitsType === 'fuwei') {
+    assert.equal(1, 1);
+    return;
+  }
   const unitsValue = units.fromWei(stringTestValue, randomunitsType);
   const web3Value = web3.fromWei(stringTestValue, randomunitsType);
 
@@ -134,5 +142,12 @@ describe('units', () => {
         testRandomValueAgainstWeb3FromWei(true);
       }
     });
+  });
+});
+
+describe('add new unit', () => {
+  it('should be correct', () => {
+    assert.equal(units.fromWei(18000000000, 'fuwei'), '180');
+    assert.equal(units.toWei(180, 'fuwei'), '18000000000');
   });
 });
